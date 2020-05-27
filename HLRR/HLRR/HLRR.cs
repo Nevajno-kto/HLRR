@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HLRR
 {
@@ -26,7 +24,6 @@ namespace HLRR
         private int DefaultPriority;
         private int CurrentProcess;
         private int EndProcess = 0;
-        private bool exit = false;
         public HLRR()
         {
             string Data;
@@ -94,7 +91,7 @@ namespace HLRR
                 }
                 CountQuant++;
             }
-            while (!exit)
+            while (true)
             {  
                 for(int i = 0; i < CountProcesses; i++)
                 {
@@ -120,6 +117,7 @@ namespace HLRR
                         else
                         {
                             Elements[i].State.Add(3);
+                            continue;
                         }
                     }
                     Elements[i].U /= 2;
@@ -140,7 +138,7 @@ namespace HLRR
                 Elements[CurrentProcess].End = true;
                 Elements[CurrentProcess].Start = false;
                 EndProcess++;
-                for(int i = 0; i < CountProcesses; i++)//Просто перебросили индекс на какой то процесс
+                for(int i = 0; i < CountProcesses; i++)
                 {
                     if (!Elements[i].End)
                     {
@@ -170,7 +168,7 @@ namespace HLRR
         {
             foreach(var element in Elements)
             {
-                Console.Write("Время рождения: " + element.BornTime + "\nВремя работы: " + element.LongTime + "\n");
+                Console.Write("Время пояления: " + element.BornTime + "\nВремя работы: " + element.LongTime + "\n");
                 foreach (var node in element.State)
                 {
                     if (node == 1)
